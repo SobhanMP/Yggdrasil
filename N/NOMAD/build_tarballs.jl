@@ -13,6 +13,10 @@ script = raw"""
 cd "${WORKSPACE}/srcdir/nomad"
 mkdir "${WORKSPACE}/path"
 export PATH="${WORKSPACE}/path:$PATH}"
+if [[ "${target}" == *-apple-* ]] || [[ "${target}" == *-freebsd* ]]; then
+    CC=gcc
+    CXX=g++
+fi
 mkdir build
 cd build
 sed s/'set(CMAKE_INSTALL_PREFIX ${PROJECT_BINARY_DIR} CACHE PATH "..." FORCE)'// -i ../CMakeLists.txt
