@@ -3,20 +3,19 @@
 using BinaryBuilder, Pkg
 
 name = "Ninja"
-version = v"1.10.0"
+version = v"1.11.0"
 
 # Collection of sources required to build ninja
 sources = [
-    ArchiveSource("https://github.com/ninja-build/ninja/archive/v1.10.0.tar.gz",
-    "3810318b08489435f8efc19c05525e80a993af5a55baa0dfeae0465a9d45f99f")
+    ArchiveSource("https://github.com/ninja-build/ninja/archive/v$(version).tar.gz",
+    "3c6ba2e66400fe3f1ae83deb4b235faf3137ec20bd5b08c29bfc368db143e4c6")
 ]
 
 # Bash recipe for building across all platforms
 script = raw"""
-cd $WORKSPACE/srcdir
-cd ninja-*/
+cd $WORKSPACE/srcdir/ninja-*
 shorttarget=$(echo $target | grep -o 'linux\|darwin\|mingw\|freebsd')
-./configure.py --host=linux --platform=$shorttarget
+env CXXFLAGS=-std=c++11 ./configure.py --host=linux --platform=$shorttarget
 ninja -j${nproc}
 mkdir -p ${bindir}
 install ninja${exeext} ${bindir}
@@ -32,7 +31,7 @@ products = [
 ]
 
 # Dependencies that must be installed before this package can be built
-dependencies = []
+dependencies = Dependency[]
 
 # Build the tarballs, and possibly a `build.jl` as well.
-build_tarballs(ARGS, name, version, sources, script, platforms, products, dependencies)
+build_tarballs(ARGS, name, version, sources, script, platforms, products, dependencies; julia_compat = "1.6")

@@ -1,6 +1,7 @@
-using BinaryBuilder
+using BinaryBuilder, Pkg
 
 name = "NOMAD"
+
 version = v"4.2.0"
 
 # Collection of sources required to complete build
@@ -11,6 +12,7 @@ sources = [
 # Bash recipe for building across all platforms
 script = raw"""
 cd "${WORKSPACE}/srcdir/nomad"
+
 mkdir "${WORKSPACE}/path"
 export PATH="${WORKSPACE}/path:$PATH}"
 if [[ "${target}" == *-apple-* ]] || [[ "${target}" == *-freebsd* ]]; then

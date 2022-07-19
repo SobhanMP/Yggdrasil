@@ -3,18 +3,18 @@
 using BinaryBuilder
 
 name = "XML2"
-version = v"2.9.10"
+version = v"2.9.14"
 
-# Collection of sources required to build XML2Builder
+# Collection of sources required to build XML2
 sources = [
     ArchiveSource("https://github.com/GNOME/libxml2/archive/v$(version).tar.gz",
-                  "3bdffb4d728e4dc135b3210bf2a2cebb76548b820a5617c68abb7b83654066dd"),
+                  "77e7c7240ce447582d2c3471f050423c01ec0e201c3bf2fd6731064d1891f362"),
 ]
 
 # Bash recipe for building across all platforms
 script = raw"""
 cd ${WORKSPACE}/srcdir/libxml2-*
-./autogen.sh --prefix=${prefix} --host=${target} \
+./autogen.sh --prefix=${prefix} --build=${MACHTYPE} --host=${target} \
     --without-python \
     --disable-static \
     --with-zlib=${prefix} \
@@ -44,5 +44,4 @@ dependencies = [
 ]
 
 # Build the tarballs, and possibly a `build.jl` as well.
-build_tarballs(ARGS, name, version, sources, script, platforms, products, dependencies)
-
+build_tarballs(ARGS, name, version, sources, script, platforms, products, dependencies; julia_compat="1.6")

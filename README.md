@@ -2,7 +2,7 @@
 
 Build Status: [![Build Status](https://dev.azure.com/JuliaPackaging/Yggdrasil/_apis/build/status/JuliaPackaging.Yggdrasil?branchName=master)](https://dev.azure.com/JuliaPackaging/Yggdrasil/_build/latest?definitionId=1&branchName=master)
 
-![Yggdrasil](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Yggdrasil.jpg/430px-Yggdrasil.jpg)
+![Yggdrasil](https://user-images.githubusercontent.com/1282691/177174254-aa90664e-5c20-4ea3-9938-34de961dc198.png)
 
 This repository contains recipes for building binaries for Julia packages using [BinaryBuilder.jl](https://github.com/JuliaPackaging/BinaryBuilder.jl).
 
@@ -13,7 +13,7 @@ To contribute a new recipe, you can either
 * use `BinaryBuilder.run_wizard()`, which will automatically open a pull request to this repository after a successfull build for all requested platforms
 * Copy another build recipe using it as a template, and then open a manual pull request to this repository
 
-Yggrasil builds the tarballs using `master` version of BinaryBuilder.jl, which requires Julia 1.3.0 or later versions.  Note that this BinaryBuilder.jl version has some differences compared to v0.1.4 and the builders generated are slightly different.  You are welcome to contribute builders written for  BinaryBuilder.jl v0.1.4, but they will likely need minor adjustements.
+Yggdrasil builds the tarballs using `master` version of BinaryBuilder.jl, which requires Julia 1.3.0 or later versions.  Note that this BinaryBuilder.jl version has some differences compared to v0.1.4 and the builders generated are slightly different.  You are welcome to contribute builders written for  BinaryBuilder.jl v0.1.4, but they will likely need minor adjustements.
 
 [Azure pipelines](https://dev.azure.com/JuliaPackaging/Yggdrasil/_build?view=runs) are used to test that the builders can successfully produce the tarballs.
 
