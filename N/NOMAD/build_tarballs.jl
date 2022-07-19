@@ -13,10 +13,13 @@ script = raw"""
 cd "${WORKSPACE}/srcdir/nomad"
 mkdir "${WORKSPACE}/path"
 export PATH="${WORKSPACE}/path:$PATH}"
+${CXX} ${WORKSPACE}/srcdir/nomad/src/Attribute/WriteAttributeDefinitionFile.cpp -o ${WORKSPACE}/path/WriteAttributeDefinitionFile
+
+sed s/'set(CMAKE_INSTALL_PREFIX ${PROJECT_BINARY_DIR} CACHE PATH "..." FORCE)'// -i CMakeLists.txt
+
 mkdir build
 cd build
-sed s/'set(CMAKE_INSTALL_PREFIX ${PROJECT_BINARY_DIR} CACHE PATH "..." FORCE)'// -i ../CMakeLists.txt
-g++ ${WORKSPACE}/srcdir/nomad/src/Attribute/WriteAttributeDefinitionFile.cpp -o ${WORKSPACE}/path/WriteAttributeDefinitionFile
+
 cmake -DBUILD_INTERFACE_C=ON -DTEST_OPENMP=OFF -DCMAKE_INSTALL_PREFIX=${prefix} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TARGET_TOOLCHAIN} -DCMAKE_BUILD_TYPE=Release ..
 make -j${nproc}
 make install
@@ -37,7 +40,7 @@ products = [
 
 # Dependencies that must be installed before this package can be built
 dependencies = [
-    Dependency(PackageSpec(name="CompilerSupportLibraries_jll", 
+    Dependency(PackageSpec(name="CompilerSupportLibraries_jll",
     uuid="e66e0078-7015-5450-92f7-15fbd957f2ae"))
 ]
 # Build the tarballs, and possibly a `build.jl` as well.
